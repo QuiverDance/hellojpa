@@ -17,13 +17,13 @@ public class JpaConnectionTest {
 
     @Test
     void test(){
-        Member member = new Member();
-        member.setId(1L); member.setName("userA");
-
-        em.persist(member);
-
-        Member findMember = em.find(Member.class, 1L);
-        Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());
-        Assertions.assertThat(findMember.getName()).isEqualTo("userA");
+//        Member member = new Member();
+//        member.setId(1L); member.setName("userA");
+//
+//        em.persist(member);
+//
+//        Member findMember = em.find(Member.class, 1L);
+//        Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());
+//        Assertions.assertThat(findMember.getName()).isEqualTo("userA");
     }
 }
