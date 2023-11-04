@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -19,6 +20,13 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
+
+    @Embedded
+    private Period period;
+
+    @Embedded
+    private Address address;
+
 
     public void changeTeam(Team team){
         this.team = team;
