@@ -11,8 +11,8 @@ public class Delivery {
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
 
-    private String city;
-    private String street;
-    private String zipcode;
+    @Embedded
+    private Address address;
+
     private DeliveryStatus status;
 }

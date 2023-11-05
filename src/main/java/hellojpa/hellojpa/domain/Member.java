@@ -15,9 +15,9 @@ public class Member {
     @Column(name = "MEMBER_ID")
     private Long id;
     private String name;
-    private String city;
-    private String street;
-    private String zipcode;
+
+    @Embedded
+    private Address address;
 
     /*
     아래 정보는 굳이 필요없음. Order 만으로도 충분히 Member의 주문 내역을 확인할 수 있음
