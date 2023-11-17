@@ -133,4 +133,14 @@ class JpqlTest {
 		//Dialect를 따로 확장하여 미리 등록해야함.
 		//select function('function_name', i.name) from Item i
 	}
+
+	@Test
+	void pathExpression(){
+		//상태 필드 : 경로 탐색의 끝, 더이상 탐색하지 않음. select m.username From Member m
+		//단일 값 연관 경로 : 묵시적 내부 조인 발생, 탐색이 더 진행 될 수 있음. -> 묵시적 조인은 잘 사용하지 않는 것이 좋음.
+		//select m.team.name From Member m
+		//컬렉션 값 연관 경로 : 묵시적 내부 조인 발생, 탐색이 더 진행되지 않음, From 절에서 명시적 조인을 통해 별칭을 얻으면 별칭으로 탐색가능
+		//select t.members From Team
+	}
+
 }
