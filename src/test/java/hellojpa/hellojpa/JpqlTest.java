@@ -143,4 +143,21 @@ class JpqlTest {
 		//select t.members From Team
 	}
 
+	@Test
+	void fetchJoin(){
+		//many to one fetch join
+		//select m from Member m join fetch m.team -> SELECT M.*, T.* FROM MEMBER M INNER JOIN TEAM T ON M.TEAM_ID=T.ID
+
+		//one to many fetch join
+		//select t from Team t join fetch t.members where t.name = '팀A'
+		//-> SELECT T.*. M.* FROM TEAM T INNER JOIN MEMBER M ON T.ID=M.TEAM_ID WHERE T.NAME = '팀A'
+
+		//JPQL의 DISTINCT는 SQL의 DISTINCT의 기능 + 중복 엔티티를 제거한다.
+		//select distinct t from Team t join fetch t.members
+
+		//fetch join의 대상에는 별칭을 줄 수 없다.
+		//둘 이상의 컬렉션은 페치조인 할 수 없다.
+		//컬렉션을 페치조인하면 페이징 API를 사용할 수 없다.
+		//-일대일, 일대다의 페치 조인의 경우 사용할 수 있지만, 일대다에서는 불가능(데이터의 수가 늘어날 수 있기 때문)
+	}
 }
