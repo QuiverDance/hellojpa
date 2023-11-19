@@ -160,4 +160,41 @@ class JpqlTest {
 		//컬렉션을 페치조인하면 페이징 API를 사용할 수 없다.
 		//-일대일, 일대다의 페치 조인의 경우 사용할 수 있지만, 일대다에서는 불가능(데이터의 수가 늘어날 수 있기 때문)
 	}
+
+	@Test
+	void typeQuery(){
+		//select i from Item i where type(i) IN (Book, Movie)
+
+		//select i from Item i where treat(i as Book).author = 'Kim'
+	}
+
+	@Test
+	void entityUsage(){
+		//select count(m) from Member m -> 엔티티를 직접 사용
+		//JPQL에서 엔티티를 직접 사용하면 SQL에서 해당 엔티티의 기본키 값을 사용
+		//== select count(m.id) from Member
+		//엔티티를 파라미터로 넘겨도 동일
+		//select m from Member m where m.id = :member에서 member를 엔티티로 넘기면 sql에서는 id로 변환된다.
+
+		//외래키 값 사용
+		//select m from Member m where m.team = :team"
+		//역시 SQL에서 id로 변환된다.
+	}
+
+	@Test
+	void namedQuery(){
+		List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+				.setParameter("username", "userA")
+				.getResultList();
+
+		//method 위에 @Query로 바로 쿼리를 작성할 수 있음. spring data jpa의 query 참고
+	}
+
+	@Test
+	void 벌크연산(){
+		//벌크연산은 영속성 컨텍스트를 무시하고 데이터베이스에 직접 실행
+		//따라서 벌크 연산 먼저 실행 or 벌크 연산 수행 후 영속성 컨텍스트 초기화 
+		//벌크 연산 수행 이후에는 em.clear()로 초기화 후 다시 조회
+		//update Member m set m.age = 20 -> .executeUpdate() -> 모든 회원의 나이를 20으로 수정
+	}
 }
